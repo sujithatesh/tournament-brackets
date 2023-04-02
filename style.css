@@ -1,16 +1,20 @@
 #up{
     color:blue;
 }
-.match{
+#match{
     width: 600px;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 20px;
 }
+
+#level{
+    padding:20px;
+}
+
 .vs{
-    display: flex;
-    flex-direction: column;
+    padding: 20px;
     width: 50%;
 }
 .bracket{
@@ -27,8 +31,7 @@
 }
 
 .bracket :hover{
-    background-color: red;
-}
+    background-color: red; }
 
 .winner{
     background-color: rgb(245, 116, 116);

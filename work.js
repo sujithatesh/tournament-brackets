@@ -17,12 +17,17 @@ while(1){
     }
 }
 
-let noOfClicks = 0;
-let level = 0;
-let initLevel =(Math.log2(noOfTeams)-noOfClicks);
 
-let oldId = document.getElementById("level");
-oldId.setAttribute("id","level"+initLevel);
+
+
+let bracketNo= 0;
+let level = 0;
+let initLevel =(Math.log2(noOfTeams)-bracketNo);
+
+let oldLevelId = document.getElementById("level");
+oldLevelId.setAttribute("id","level"+initLevel);
+let initBracketId = document.getElementById("b1");
+initBracketId.setAttribute("id",initLevel+"-"+"0");
 
 
 function winner_bracket(){
@@ -31,26 +36,44 @@ function winner_bracket(){
 }
 
 function createNewLevel(level){
-    if(level<0)
+    if(level<1)
         return;
     var newLevelDiv = document.createElement("div");
     newLevelDiv.classList.add("level");
-    newLevelDiv.textContent = "Hello";
+    newLevelDiv.textContent = "level: "+level;
     newLevelDiv.id = "level"+(level);
+    let bracketsPerLevel = 2**(level-1);
+    var bracketNo = 0;
+    while(bracketsPerLevel--){
+        requestAnimationFrame(() => createNewBracket(level,bracketNo));
+        bracketNo++;
+    }
     match.appendChild(newLevelDiv);
 }
 
-function createNewBracket(){
-    noOfClicks++;
-    let oldLevel = level;
-    level = (Math.log2(noOfTeams)-noOfClicks);
-    if(oldLevel!=level){
-        createNewLevel(level);
-    }
-    if(level<0)
+
+function createNewBracket(level,bracketNo){
+    if(level<1)
         return;
-    const newBracket = document.getElementById('b1').cloneNode(true); 
-    newBracket.id = "b"+(noOfClicks);
+    const newBracket = document.getElementById(initLevel+"-"+"0").cloneNode(true); 
+    newBracket.id = level+bracketNo;
     let Divlevel = document.getElementById('level'+level);
-    Divlevel.appendChild(newBracket);
+    if (Divlevel) {
+        console.log(Divlevel.id);
+        Divlevel.appendChild(newBracket);
+    } 
+    else {
+        console.error('Could not find element with id "level' + level + '".');
+    }
+    //console.log(Divlevel.id);
+    //Divlevel.appendChild(newBracket);
+}
+
+function createMatch(){
+    var tempLevel = initLevel; 
+    while(tempLevel>1){
+        tempLevel--;
+        createNewLevel(tempLevel); 
+        console.log(tempLevel);
+    }
 }
