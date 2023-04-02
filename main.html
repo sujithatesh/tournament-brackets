@@ -5,16 +5,17 @@
         <link type="text/css" rel = "stylesheet" href="style.css">
     </head>
     <body>
-        <div class = "match">
-        
-            <div class = "vs" id="b1">
-                <button type="button" id = "up" class = "bracket">
-                    This is an up bracket.
-                </button>
-                
-                <button type="button" id = "down" class = "bracket" onclick="winner_bracket()">
-                    This is a down bracket.
-                </button>
+        <div class = "match" id = "match">
+            <div id = "level">
+                <div class = "vs" id="b1">
+                    <button type="button" id = "up" class = "bracket">
+                        This is an up bracket.
+                    </button>
+                    
+                    <button type="button" id = "down" class = "bracket" onclick="winner_bracket()">
+                        This is a down bracket.
+                    </button>
+                </div>
             </div>
             <button type = "button" id = "newBracketButton" onclick = "createNewBracket()">
                 Click here for a new bracket.
