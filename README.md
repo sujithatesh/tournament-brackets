@@ -1,1 +1,2 @@
-'''This is a simple tournament bracket viewer
+# Tournament Brackets
+This is a basic torunament brackets viewer
