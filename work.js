@@ -2,6 +2,13 @@ let noOfTeams = 0;
 let bracketNo= 0;
 let level = 0;
 let initLevel = 0;
+let Teams = []
+
+let oldLevelId = document.getElementById("level");
+oldLevelId.setAttribute("id","level"+initLevel);
+
+let initBracketId = document.getElementById("b1");
+initBracketId.setAttribute("id",initLevel+"-"+"0");
 
 
 function createMatch(){
@@ -15,7 +22,7 @@ function createMatch(){
 }
 
 
-function printlog(){
+function start(){
     noOfTeams= parseInt(document.getElementById("noTeams").value);
     console.log("Teams",noOfTeams)
     initLevel = Math.floor(Math.log2(noOfTeams)) - bracketNo + 1;
@@ -23,17 +30,6 @@ function printlog(){
     createMatch()
     document.getElementById("level0").classList.add("hide");
 }
-
-console.log("noTeams",initLevel)
-console.log("init",initLevel)
-console.log("brack",bracketNo)
-
-let oldLevelId = document.getElementById("level");
-oldLevelId.setAttribute("id","level"+initLevel);
-
-let initBracketId = document.getElementById("b1");
-initBracketId.setAttribute("id",initLevel+"-"+"0");
-console.log("initbrac",initBracketId)
 
 
 function winner_bracket(){
@@ -83,5 +79,11 @@ function createNewBracket(level,bracketNo){
 }
 
 
+function addTeam(){
+    var team = document.getElementById("Teams");
+    Teams.push(team.value);
+    team.value = "";
+    console.log(Teams)
+}
 
 
