@@ -5,23 +5,21 @@
         <link type="text/css" rel = "stylesheet" href="style.css">
     </head>
     <body>
+        <input type="text" id="noTeams" placeholder="Enter text">
+        <button id="submitButton" onclick={printlog()}>Submit</button>
         <div class = "match" id = "match">
-            <div id = "level">
-                <div class = "vs" id="b1">
-                    <button type="button" id = "up" class = "bracket">
-                        This is an up bracket.
-                    </button>
-                    
-                    <button type="button" id = "down" class = "bracket" onclick="winner_bracket()">
-                        This is a down bracket.
-                    </button>
+                <div id = "level">
+                    <div class = "vs" id="b1" >
+                        <button type="button" id = "up" class = "bracket" onclick="winner_bracket()"}>
+                            This is an up bracket.
+                        </button>
+
+                        <button type="button" id = "down" class = "bracket" onclick="winner_bracket()"}>
+                            This is a down bracket.
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
         </div>
-        <button type = "button" id = "newBracketButton" onclick = "createMatch()">
-            Click here for a new bracket.
-        </button>
         <script src = "work.js"></script>
     </body>
 </html>
