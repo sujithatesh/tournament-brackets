@@ -12,7 +12,7 @@
     padding: 20px;
 }
 
-#level{
+.level{
     padding:20px;
 }
 
@@ -44,3 +44,6 @@
     display: none;
 }
 
+.final{
+    background-color: greenyellow;
+}
