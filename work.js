@@ -1,5 +1,5 @@
 let noOfTeams = 0;
-let bracketNo= 0;
+let vsNo= 0;
 let level = 0;
 let initLevel = 0;
 let Teams = []
@@ -10,25 +10,61 @@ oldLevelId.setAttribute("id","level"+initLevel);
 let initBracketId = document.getElementById("b1");
 initBracketId.setAttribute("id",initLevel+"-"+"0");
 
+function start(){ noOfTeams= parseInt(document.getElementById("noTeams").value);
+    initLevel = Math.floor(Math.log2(noOfTeams)) - vsNo + 1;
+    createMatch();
+    document.getElementById("level0").classList.add("hide");
+}
 
 function createMatch(){
     var tempLevel = initLevel; 
     while(tempLevel>1){
         tempLevel--;
         createNewLevel(tempLevel); 
-        console.log(tempLevel);
     }
-    console.log("hello");
 }
 
 
-function start(){
-    noOfTeams= parseInt(document.getElementById("noTeams").value);
-    console.log("Teams",noOfTeams)
-    initLevel = Math.floor(Math.log2(noOfTeams)) - bracketNo + 1;
-    console.log("init",initLevel)
-    createMatch()
-    document.getElementById("level0").classList.add("hide");
+function createNewLevel(level){
+    if(level<1)
+        return;
+    var newLevelDiv = document.createElement("div");
+    newLevelDiv.classList.add("level");
+    newLevelDiv.textContent = "level: "+level;
+    newLevelDiv.id = "level"+(level);
+    let noOfVs = 2 ** (level-1);
+    while(noOfVs--){
+        requestAnimationFrame(() => createNewVs(noOfVs, newLevelDiv));
+        vsNo++;
+    }
+    match.appendChild(newLevelDiv);
+}
+
+function createNewVs(order, newLevelDiv){
+    let newVs = document.createElement("div");
+    newVs.classList.add("vs");
+    newVs.id = "b" + order;
+    requestAnimationFrame(() => createNewBracket("up", newVs));
+    requestAnimationFrame(() => createNewBracket("down", newVs));
+    newLevelDiv.append(newVs);
+}
+
+
+function createNewBracket(upOrDown, newVs){
+    let newBracket = document.createElement("button");
+    newBracket.classList.add("bracket");
+    newBracket.addEventListener("click",winner_bracket);
+    switch (upOrDown) {
+        case "up":
+            newBracket.innerHTML = "UP";
+            break;
+        case "down":
+            newBracket.innerHTML = "DOWN";
+            break;
+        default:
+            break;
+    }
+    newVs.append(newBracket);
 }
 
 
@@ -42,48 +78,9 @@ function winner_bracket(){
     clickedBracket.classList.toggle("winner");
 }
 
-function createNewLevel(level){
-    if(level<1)
-        return;
-    var newLevelDiv = document.createElement("div");
-    newLevelDiv.classList.add("level");
-    newLevelDiv.textContent = "level: "+level;
-    newLevelDiv.id = "level"+(level);
-    console.log(newLevelDiv)
-    let bracketsPerLevel = 2**(level-1);
-    var bracketNo = 0;
-    while(bracketsPerLevel--){
-        requestAnimationFrame(() => createNewBracket(level,bracketNo));
-        bracketNo++;
-    }
-    match.appendChild(newLevelDiv);
-}
-
-
-function createNewBracket(level,bracketNo){
-    if(level<1)
-    return;
-    let newBracket = null;
-    console.log("initlevel",initLevel);
-    newBracket = document.getElementById("0-0").cloneNode(true); 
-    console.log("newbrac",newBracket)
-    newBracket.id = level+bracketNo;
-    let Divlevel = document.getElementById('level'+level);
-    if (Divlevel) {
-        console.log("divlevel",Divlevel.id);
-        Divlevel.appendChild(newBracket);
-    } 
-    else {
-        console.error('Could not find element with id "level' + level + '".');
-    }
-}
-
 
 function addTeam(){
     var team = document.getElementById("Teams");
     Teams.push(team.value);
     team.value = "";
-    console.log(Teams)
 }
-
-
