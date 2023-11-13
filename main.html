@@ -1,27 +1,17 @@
-    <!-- This is a new comment -->
+<!-- This is a new comment -->
 <html>
     <head>
         <title>Brackets</title>
         <link type="text/css" rel = "stylesheet" href="style.css">
     </head>
     <body>
-        <input type="text" id="noTeams" placeholder="Enter text">
-        <button id="submitButton" onclick="start()">Submit</button>
-        <input type="textArea" id="Teams" placeholder="Enter the Teams">
+        <input type="textArea" id="inputTeams" placeholder="Enter the Teams">
         <button onclick="addTeam()"> + </button>
-        <div class = "match" id = "match">
-                <div id = "level">
-                    <div class = "vs" id="b1" >
-                        <button type="button" id = "up" class = "bracket" onclick="winner_bracket()"}>
-                            This is an up bracket.
-                        </button>
-
-                        <button type="button" id = "down" class = "bracket" onclick="winner_bracket()"}>
-                            This is a down bracket.
-                        </button>
-                    </div>
-                </div>
+        <button onclick="deleteTeam()"> - </button>
+        <div id = "Teams">
         </div>
+        <button id="submitButton" onclick="start()">Submit</button>
+        <div class = "match" id = "match"> </div>
         <script src = "work.js"></script>
     </body>
 </html>
